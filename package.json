@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/WebAhead6/YummyYalla/issues"
   },
-  "homepage": "https://github.com/WebAhead6/YummyYalla#readme"
+  "homepage": "https://github.com/WebAhead6/YummyYalla#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "pg": "^8.3.0"
+  }
 }
