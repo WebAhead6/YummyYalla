@@ -64,10 +64,28 @@ function createNewReview(data) {
   );
 }
 
+function autocomplete(input) {
+  return db
+    .query(
+      `
+    SELECT locationID,locationName FROM locations
+    WHERE locationnName LIKE $1;
+    `,
+      [input + "%"]
+    )
+    .then((results) => {
+      return results.rows;
+    })
+    .catch((err) => {
+      //do something
+      console.log(err);
+    });
+}
 module.exports = {
   getAllResturants,
   getLocationResturants,
   getResturantDetails,
   getResturantReviews,
   createNewReview,
+  autocomplete,
 };
