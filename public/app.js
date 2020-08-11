@@ -60,11 +60,13 @@ function autocompleter(event) {
         console.log("data:", input.value);
 
         dataRes = {
-          resturantName: response[0]["name"],
-          resturantRating: response[0]["rating"],
+          locationName: response[0]["name"],
+          locationID: response[0]["id"],
         };
 
-        resultsArray = [...response];
+        resultsArray = response.map((locationElement) => {
+          return locationElement.name;
+        });
         // clear any previously loaded options in the datalist
         listo.innerHTML = "";
         resultsArray.forEach((element) => {
