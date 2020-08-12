@@ -5,13 +5,13 @@ function reviewSubmitter(request, response) {
   let body = "";
   request.on("data", (chunk) => (body += chunk));
   request.on("end", () => {
-    const searchParams = new URLSearchParams(body);
-    const data = Object.fromEntries(searchParams);
+    const data = JSON.parse(body);
     model
       .createNewReview(data)
       .then(() => {
-        response.writeHead(302, { location: "/" });
-        response.end();
+        console.log(data);
+        response.writeHead(200);
+        response.end(JSON.stringify("success"));
       })
       .catch((error) => {
         console.log(error);

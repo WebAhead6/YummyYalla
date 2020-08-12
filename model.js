@@ -61,10 +61,11 @@ function getRestaurantReviews(resturantData) {
 
 function createNewReview(data) {
   const values = [data.id, data.author, data.review];
+  console.log(values);
   return db.query(
     `
-    INSERT INTO reviews(restaurant_id, review_author, review) VALUES($1,$2,$3),values
-  `
+    INSERT INTO reviews(restaurant_id, review_author, review) VALUES($1,$2,$3)`,
+    values
   );
 }
 

@@ -38,6 +38,7 @@ form.addEventListener("submit", (event) => {
         const li = document.createElement("li");
         li.textContent = `${item.restaurant_name}   rating: ${item.rating}`;
         restaurantInfo.appendChild(li);
+        /// add event listener to the data(restaurants) retrieved
         li.addEventListener("click", function getResturantInfo(event) {
           location.replace(`/resinfo?id=${item.id}`);
           event.preventDefault();
@@ -102,8 +103,3 @@ function autocompleter(event) {
       });
   }
 }
-/// add event listener to the data(restaurants) retrieved
-"restaurantname".addEventListener("click", function getResturantInfo(event) {
-  location.replace(`/resinfo?id=${resname}`);
-  event.preventDefault();
-});
