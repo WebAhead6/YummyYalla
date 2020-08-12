@@ -10,16 +10,18 @@ function getLocationResturants(locationData) {
   return db
     .query(
       `
-        SELECT resturants.name, resturants.desc , resturants.rating
-        FROM resturants INNER JOIN locations
-        ON resturants.locationID = $1
-        ORDER BY resturants.name;
+        SELECT restaurant_name, rating
+        FROM restaurants WHERE location_id = $1
+        ORDER BY restaurant_name;
         `,
-      [locationData.locationID]
+      [`${locationData.id}`]
     )
-    .then((resutls) => results.row)
+    .then((resutls) => {
+      return resutls.rows;
+    })
     .catch((err) => {
       //do something
+      console.log(err);
     });
 }
 

@@ -1,9 +1,12 @@
 const form = document.querySelector("#autoform");
 const inputField = document.querySelector("#inputField");
 const submitBtn = document.querySelector(".formButton");
-const results = document.querySelector("#results-container");
+const results = document.querySelector(".restname");
+
 let dataRes = {};
 // Add a keyup event listener to our input element
+
+let id;
 
 inputField.addEventListener("keyup", (event) => {
   dataRes = {};
@@ -15,14 +18,40 @@ inputField.addEventListener("keyup", (event) => {
 form.addEventListener("submit", (event) => {
   let resultsContainer = document.querySelector("#results-container");
   resultsContainer.innerText = "";
+  const restaurantInfo = document.createElement("ol");
+  resultsContainer.appendChild(restaurantInfo);
   event.preventDefault();
   console.log(inputField.value);
-
   //fetch function should be started here <------------
+  fetch("/search", {
+    method: "POST",
+    body: JSON.stringify({
+      id: id,
+    }),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      data.map((item) => {
+        const li = document.createElement("li");
+        li.textContent = `${item.restaurant_name} ${item.rating}`;
+        restaurantInfo.appendChild(li);
+      });
+    })
 
-  inputField.innerText = "";
+    //   resultsContainer.textContent = data.map(
+    //     (data) => `<li>${data.restaurant_name}"+" ${data.rating}</li>`
+    //   )
+    //   `<ul>${resultsContainer.join("")}</ul>`;
+    // })
+    .catch((err) => {
+      console.error("Something went wrong during autocompleting : " + err);
+    });
+
+  // inputField.innerText = "";
   getDeleteBtn().style.display = "block";
-  getDeleteBtn().addEventListener("click", deleteEverything);
+  // getDeleteBtn().addEventListener("click", deleteEverything);
 });
 // a cleaer resutls button, not very useful atm
 function getDeleteBtn() {
@@ -56,20 +85,13 @@ function autocompleter(event) {
         }
       })
       .then((response) => {
-        console.log("response: ", response);
-        console.log("data:", input.value);
-
-        dataRes = {
-          locationName: response[0]["name"],
-          locationID: response[0]["id"],
-        };
-
         // clear any previously loaded options in the datalist
         listo.innerHTML = "";
         response.forEach((element) => {
           // Create a new <option> element.
           let option = document.createElement("option");
           // option.value = element.id;
+          id = element.id;
           option.textContent = element.name;
 
           // attach the option to the datalist element

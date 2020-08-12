@@ -12,17 +12,12 @@ function resturantFetcher(request, response) {
   request.on("end", () => {
     if (data) {
       data = JSON.parse(data);
-      console.log(" data we are gettinnngg innto server \n" + data);
       // get all the resturants baseed on the passed location
       // fetch call to the database -> should get us the results, we should be using the model functions
       model
         .getLocationResturants(data)
-        .then(() => {
-          console.log(
-            " =================resturantDATA=============== \n",
-            data
-          );
-          response.end(JSON.stringify(pokeData.data));
+        .then((matches) => {
+          response.end(JSON.stringify(matches));
         })
         .catch((error) => {
           console.error(error);
