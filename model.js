@@ -68,10 +68,10 @@ function autocomplete(input) {
   return db
     .query(
       `
-    SELECT locationID,locationName FROM locations
-    WHERE locationnName LIKE $1;
+    SELECT id,city_name AS name FROM locations
+    WHERE city_name LIKE $1
     `,
-      [input + "%"]
+      [`${input}%`]
     )
     .then((results) => {
       return results.rows;
