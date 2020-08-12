@@ -12,7 +12,7 @@ CREATE TABLE restaurants (
   location_id INTEGER REFERENCES locations(id),
 restaurant_name VARCHAR(255),
   rating INTEGER,
-  menu TEXT
+  menu TEXT 
 );
 
 CREATE TABLE reviews (

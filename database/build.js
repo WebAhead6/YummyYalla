@@ -7,6 +7,7 @@ const initSQL = fs.readFileSync(initPath, "utf-8");
 
 db.query(initSQL)
   .then(() => {
+    console.log("database created");
     db.end();
   })
   .catch();
