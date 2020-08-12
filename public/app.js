@@ -103,3 +103,8 @@ function autocompleter(event) {
       });
   }
 }
+/// add event listener to the data(restaurants) retrieved
+"restaurantname".addEventListener("click", function getResturantInfo(event) {
+  location.replace(`/resinfo?id=${resname}`);
+  event.preventDefault();
+});

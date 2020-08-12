@@ -4,7 +4,9 @@
   "description": "your local resturant finder!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:db": "node database/build.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/WebAhead6/YummyYalla#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4",
     "pg": "^8.3.0"
   }
 }
