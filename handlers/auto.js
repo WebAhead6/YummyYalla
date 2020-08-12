@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs");
-const db = require("../data/db.json");
 const missingHandler = require("./missing");
 const model = require("../model");
 
@@ -13,8 +12,9 @@ function autoHandler(request, response) {
 
   request.on("end", () => {
     if (data) {
-      response.writeHead(200, {"content-type": "application/json"});
+      response.writeHead(200, { "content-type": "application/json" });
       model.autocomplete(data).then((matches) => {
+        console.log(matches);
         response.end(JSON.stringify(matches));
       });
     } else {

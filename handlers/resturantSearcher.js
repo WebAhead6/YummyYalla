@@ -20,7 +20,7 @@ function resturantFetcher(request, response) {
         .then(() => {
           console.log(
             " =================resturantDATA=============== \n",
-            pokeData.data
+            data
           );
           response.end(JSON.stringify(pokeData.data));
         })
@@ -31,4 +31,4 @@ function resturantFetcher(request, response) {
     }
   });
 }
-module.exports = pokeFetcher;
+module.exports = resturantFetcher;

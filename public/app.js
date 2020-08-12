@@ -47,7 +47,7 @@ function autocompleter(event) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(input.value),
+      body: input.value,
     })
       .then((response) => {
         if (response.ok) {
@@ -64,15 +64,13 @@ function autocompleter(event) {
           locationID: response[0]["id"],
         };
 
-        resultsArray = response.map((locationElement) => {
-          return locationElement.name;
-        });
         // clear any previously loaded options in the datalist
         listo.innerHTML = "";
-        resultsArray.forEach((element) => {
+        response.forEach((element) => {
           // Create a new <option> element.
           let option = document.createElement("option");
-          option.value = element.name;
+          // option.value = element.id;
+          option.textContent = element.name;
 
           // attach the option to the datalist element
           listo.appendChild(option);
