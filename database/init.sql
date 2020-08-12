@@ -43,6 +43,9 @@ INSERT INTO restaurants(location_id,restaurant_name,rating,menu) VALUES
 ;
 
 INSERT INTO reviews (restaurant_id, review_author, review) VALUES 
+(1, 'Abeer', 'Very welcoming staff and yummy food'),
+(1, 'Abeer', 'Very welcoming staff and yummy food'),
+(1, 'Mario', 'Very welcoming staff and yummy food'),
 (1, 'Abeer', 'Very welcoming staff and yummy food');
 
 

@@ -14,7 +14,6 @@ function autoHandler(request, response) {
     if (data) {
       response.writeHead(200, { "content-type": "application/json" });
       model.autocomplete(data).then((matches) => {
-        // console.log(matches);
         response.end(JSON.stringify(matches));
       });
     } else {

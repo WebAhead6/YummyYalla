@@ -10,7 +10,7 @@ function getLocationResturants(locationData) {
   return db
     .query(
       `
-        SELECT restaurant_name, rating
+        SELECT *
         FROM restaurants WHERE location_id = $1
         ORDER BY restaurant_name;
         `,
@@ -58,9 +58,10 @@ function getResturantReviews(resturantData) {
 }
 
 function createNewReview(data) {
+  const values = [data.id, data.author, data.review];
   return db.query(
     `
-    INSERT INTO reviews(reviewID,author,text,score,resturantID) VALUES($1,$2,$3,$4,$5)
+    INSERT INTO reviews(reviewID,author,text,score,resturantID) VALUES($1,$2,$3,$4,$5),values
   `,
     [data.reviewID, data.author, data.text, data.score, data.resturantID]
   );
