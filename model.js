@@ -1,6 +1,6 @@
 const db = require("./database/connection");
 
-function getAllResturants() {
+function getAllRestaurants() {
   return db.query("SELECT * FROM resturants").then((results) => {
     return results.rows;
   });
@@ -25,29 +25,31 @@ function getLocationResturants(locationData) {
     });
 }
 
-function getResturantDetails(resturantData) {
+function getRestaurantDetails(restaurantid) {
   return db
     .query(
       `
-        SELECT * FROM resturants
-        WHERE resturants.resturantID = $1
+        SELECT * FROM restaurants 
+        WHERE resturants.resturantID LIKE $1
         `,
-      [resturantData.resturantID]
+      [`${input}%`]
     )
+
     .then((results) => results.row)
+
     .catch((err) => {
       //do something
     });
 }
 
-function getResturantReviews(resturantData) {
+function getRestaurantReviews(resturantData) {
   return db
     .query(
       `
     SELECT *
     FROM reviews WHERE resturantID = $1 
     `,
-      [resturantData.resturantID]
+      [`${input}%`]
     )
     .then((results) => {
       results.rows;
@@ -84,10 +86,10 @@ function autocomplete(input) {
     });
 }
 module.exports = {
-  getAllResturants,
+  getAllRestaurants,
   getLocationResturants,
-  getResturantDetails,
-  getResturantReviews,
+  getRestaurantDetails,
+  getRestaurantReviews,
   createNewReview,
   autocomplete,
 };
