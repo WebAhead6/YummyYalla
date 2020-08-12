@@ -61,9 +61,8 @@ function createNewReview(data) {
   const values = [data.id, data.author, data.review];
   return db.query(
     `
-    INSERT INTO reviews(reviewID,author,text,score,resturantID) VALUES($1,$2,$3,$4,$5),values
-  `,
-    [data.reviewID, data.author, data.text, data.score, data.resturantID]
+    INSERT INTO reviews(restaurant_id, review_author, review) VALUES($1,$2,$3),values
+  `
   );
 }
 
