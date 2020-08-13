@@ -37,14 +37,14 @@ form.addEventListener("submit", (event) => {
         const li = document.createElement("li");
         li.textContent = `${item.restaurant_name} ${item.rating}`;
         restaurantInfo.appendChild(li);
+        li.addEventListener("click", function getResturantInfo(event) {
+          console.log(item.id);
+          location.replace(`/resinfo?id=${item.id}`);
+          event.preventDefault();
+        });
       });
     })
 
-    //   resultsContainer.textContent = data.map(
-    //     (data) => `<li>${data.restaurant_name}"+" ${data.rating}</li>`
-    //   )
-    //   `<ul>${resultsContainer.join("")}</ul>`;
-    // })
     .catch((err) => {
       console.error("Something went wrong during autocompleting : " + err);
     });
@@ -104,7 +104,3 @@ function autocompleter(event) {
   }
 }
 /// add event listener to the data(restaurants) retrieved
-"restaurantname".addEventListener("click", function getResturantInfo(event) {
-  location.replace(`/resinfo?id=${resname}`);
-  event.preventDefault();
-});
