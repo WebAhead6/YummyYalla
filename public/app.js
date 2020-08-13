@@ -18,8 +18,7 @@ inputField.addEventListener("keyup", (event) => {
 // form submiter - calls a function that will connect with the server and fetch the resturants data based on the locations
 form.addEventListener("submit", (event) => {
   resultsContainer.innerText = "";
-  // const restaurantInfo = document.createElement("ol");
-  // resultsContainer.appendChild(restaurantInfo);
+ 
   event.preventDefault();
   console.log(inputField.value);
   //fetch function should be started here <------------
