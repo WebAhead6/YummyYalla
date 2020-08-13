@@ -268,3 +268,22 @@ img {
 .form-style-5 input[type="button"]:hover {
   background: #d8af45;
 }
+
+#results-container {
+  padding: 4%;
+  padding-top: 0%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+}
+.card {
+  display: flex;
+  flex-flow: wrap;
+  width: 30%;
+}
+.fullcard {
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}

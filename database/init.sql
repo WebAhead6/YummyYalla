@@ -12,7 +12,8 @@ CREATE TABLE restaurants (
   location_id INTEGER REFERENCES locations(id),
 restaurant_name VARCHAR(255),
   rating INTEGER,
-  menu TEXT 
+  menu TEXT,
+  imgUrl TEXT
 );
 
 CREATE TABLE reviews (
@@ -33,13 +34,13 @@ INSERT INTO locations (city_name) VALUES
 ('Magdal Shams'),
 ('Tamra');
 
-INSERT INTO restaurants(location_id,restaurant_name,rating,menu) VALUES
- (1, 'Fattoush', 4, 'Kabab, Hummus, Tabule'),
- (1, 'Garden', 4, 'Fattush, CesarSalad, Fattuciani'),
- (1, 'Stella Marris', 5, 'Ravioli, Penne, Ceviche'),
- (2, 'Onza', 4, 'Kabab, Hummus, Tabule'),
- (2, 'Abu Hassan', 4, 'Kabab, Hummus, Tabule'),
- (2, 'AL kahle', 4, 'Kabab, Hummus, Tabule')
+INSERT INTO restaurants(location_id,restaurant_name,rating,menu,imgUrl) VALUES
+ (1, 'Fattoush', 4, 'Kabab, Hummus, Tabule','/public/img/fattoush.jpg'),
+ (1, 'Garden', 4, 'Fattush, CesarSalad, Fattuciani','/public/img/garden.jpeg'),
+ (1, 'Stella Marris', 5, 'Ravioli, Penne, Ceviche','/public/img/stellaMaris.jpeg'),
+ (2, 'Onza', 4, 'Kabab, Hummus, Tabule','/public/img/Onza.jpeg'),
+ (2, 'Abu Hassan', 4, 'Kabab, Hummus, Tabule','/public/img/AbuHassan.jpg'),
+ (2, 'AL kahle', 4, 'Kabab, Hummus, Tabule','/public/img/ALKahle')
 ;
 
 INSERT INTO reviews (restaurant_id, review_author, review) VALUES 

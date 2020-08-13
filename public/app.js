@@ -2,6 +2,7 @@ const form = document.querySelector("#autoform");
 const inputField = document.querySelector("#inputField");
 const submitBtn = document.querySelector(".formButton");
 const results = document.querySelector(".restname");
+let resultsContainer = document.querySelector("#results-container");
 
 let dataRes = {};
 // Add a keyup event listener to our input element
@@ -16,10 +17,9 @@ inputField.addEventListener("keyup", (event) => {
 });
 // form submiter - calls a function that will connect with the server and fetch the resturants data based on the locations
 form.addEventListener("submit", (event) => {
-  let resultsContainer = document.querySelector("#results-container");
   resultsContainer.innerText = "";
-  const restaurantInfo = document.createElement("ol");
-  resultsContainer.appendChild(restaurantInfo);
+  // const restaurantInfo = document.createElement("ol");
+  // resultsContainer.appendChild(restaurantInfo);
   event.preventDefault();
   console.log(inputField.value);
   //fetch function should be started here <------------
@@ -35,27 +35,29 @@ form.addEventListener("submit", (event) => {
     .then((data) => {
       console.log(data);
       data.map((item) => {
-        const li = document.createElement("li");
-        li.textContent = `${item.restaurant_name}   rating: ${item.rating}`;
-        restaurantInfo.appendChild(li);
-        /// add event listener to the data(restaurants) retrieved
-        li.addEventListener("click", function getResturantInfo(event) {
-          location.replace(`/resinfo?id=${item.id}`);
-          event.preventDefault();
-        });
+        // build the card element - the layout of the results
+        cardBuilder(item);
       });
     })
-
     .catch((err) => {
       console.error("Something went wrong during autocompleting : " + err);
     });
-
-  getDeleteBtn().style.display = "block";
-  // getDeleteBtn().addEventListener("click", deleteEverything);
 });
-// a cleaer resutls button, not very useful atm
-function getDeleteBtn() {
-  return document.querySelector("#delete-btn");
+
+function cardBuilder(obj) {
+  resultsContainer.innerHTML += `
+      <div  class="card">
+      <img src="${obj.imgurl}" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">${obj.restaurant_name}</h5>
+        <p class="card-text">Resturant Rating ${obj.rating}</p>
+        <button onclick="redierct(${obj.id})" class="btn btn-primary meals resBtn">Go to resturant</button>
+      </div>
+      </div>
+  `;
+}
+function redierct(id) {
+  location.replace(`/resinfo?id=${id}`);
 }
 
 // Autocomplete for form

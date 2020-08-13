@@ -9,6 +9,8 @@ const types = {
   json: "application/json",
   icon: "image/x-icon",
   gif: "image/gif",
+  jpg: "image/jpg",
+  jpeg: "image/jpeg",
 };
 
 function publicHandler(request, response) {
@@ -23,7 +25,7 @@ function publicHandler(request, response) {
     if (error) {
       missingHandler(request, response);
     } else {
-      response.writeHead(200, {"content-type": type});
+      response.writeHead(200, { "content-type": type });
       response.end(file);
     }
   });
