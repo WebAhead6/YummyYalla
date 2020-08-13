@@ -26,37 +26,30 @@ function getLocationResturants(locationData) {
 }
 
 function getRestaurantDetails(restaurantid) {
+  console.log(restaurantid);
   return db
     .query(
       `
-        SELECT * FROM restaurants 
-        WHERE resturants.resturantID LIKE $1
+        SELECT restaurant_name, rating, menu
+         FROM restaurants 
+        WHERE id = $1
         `,
-      [`${input}%`]
+      [restaurantid]
     )
 
-    .then((results) => results.row)
-
-    .catch((err) => {
-      //do something
-    });
+    .then((results) => results.rows);
 }
 
-function getRestaurantReviews(resturantData) {
+function getRestaurantReviews(restaurantid) {
   return db
     .query(
       `
     SELECT *
-    FROM reviews WHERE resturantID = $1 
+    FROM reviews WHERE restaurant_id = $1 
     `,
-      [`${input}%`]
+      [restaurantid]
     )
-    .then((results) => {
-      results.rows;
-    })
-    .catch((err) => {
-      //do something with the error
-    });
+    .then((results) => results.rows);
 }
 
 function createNewReview(data) {
