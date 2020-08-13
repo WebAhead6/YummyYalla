@@ -33,23 +33,23 @@ form.addEventListener("submit", (event) => {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       data.map((item) => {
         const li = document.createElement("li");
-        li.textContent = `${item.restaurant_name} ${item.rating}`;
+        li.textContent = `${item.restaurant_name}   rating: ${item.rating}`;
         restaurantInfo.appendChild(li);
+        /// add event listener to the data(restaurants) retrieved
+        li.addEventListener("click", function getResturantInfo(event) {
+          location.replace(`/resinfo?id=${item.id}`);
+          event.preventDefault();
+        });
       });
     })
 
-    //   resultsContainer.textContent = data.map(
-    //     (data) => `<li>${data.restaurant_name}"+" ${data.rating}</li>`
-    //   )
-    //   `<ul>${resultsContainer.join("")}</ul>`;
-    // })
     .catch((err) => {
       console.error("Something went wrong during autocompleting : " + err);
     });
 
-  // inputField.innerText = "";
   getDeleteBtn().style.display = "block";
   // getDeleteBtn().addEventListener("click", deleteEverything);
 });
@@ -103,8 +103,3 @@ function autocompleter(event) {
       });
   }
 }
-/// add event listener to the data(restaurants) retrieved
-"restaurantname".addEventListener("click", function getResturantInfo(event) {
-  location.replace(`/resinfo?id=${resname}`);
-  event.preventDefault();
-});

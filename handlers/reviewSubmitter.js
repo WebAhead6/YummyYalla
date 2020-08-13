@@ -2,23 +2,22 @@ const missingHandler = require("./missing");
 const model = require("../model");
 
 function reviewSubmitter(request, response) {
-  let data = "";
-
-  request.on("data", (chunk) => {
-    data += chunk;
-  });
-
+  let body = "";
+  request.on("data", (chunk) => (body += chunk));
   request.on("end", () => {
-    if (data) {
-      response.writeHead(200, { "content-type": "application/json" });
-      model.autocomplete(data).then((matches) => {
-        console.log(matches);
-        response.end(JSON.stringify(matches));
+    const data = JSON.parse(body);
+    model
+      .createNewReview(data)
+      .then(() => {
+        console.log(data);
+        response.writeHead(200);
+        response.end(JSON.stringify("success"));
+      })
+      .catch((error) => {
+        console.log(error);
+        response.writeHead(500, { "content-type": "text/html" });
+        response.end(`<h1>Something went wrong saving your data</h1>`);
       });
-    } else {
-      missingHandler(request, response);
-    }
   });
 }
-
 module.exports = reviewSubmitter;
